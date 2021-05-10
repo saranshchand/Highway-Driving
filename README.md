@@ -1,6 +1,14 @@
 # CarND-Path-Planning-Project
 Self-Driving Car Engineer Nanodegree Program
-   
+
+# Model Documentation
+
+This project was a great way to implement knowledge learnt about predicting future states of vehicles around us, and attempting to safely navigate a path that is safe, comfortable, and elegant trajectory. The referencce velocity is initialized to 0 MPH and is gradually increased by the maximum allowed acceleration until a car comes up ahead in the lane and it cannot change lanes- its speed will decrease, and will also decrease if the speed limit reaches above the legal limit. 
+
+The most interesting part of the project was using the sensor fusion vector "auto sensor_fusion = j[1]["sensor_fusion"];" to find other cars nearby our car and determine whether it is ahead in our lane, to the left, or the right of the lane. By implementing simple logic about the d-location of these cars, we can find out which lanes each vehicle belongs to. After this we can take steps to change lanes if our flow or driving is being slowed down. We try to drive in the center lanes at most times as it allows for multiple options (both left and right).
+
+We create widely spaced points to build the trajectory- the the previous path size is less than 2, we recreate a tangent trajectory for smoothing purposes by using x, y, and heading information of the car and concatenating those points. We then add three extra waypoints, 30, 60, and 90 meters, depending upon s, and d configurations (for example is there a car ahead, left, or right which corresponds to a lane change to beat the obstacle). A local transformation is then done based upon the car's heading to allow for the math to be much simpler. We then, finally, use the spline library to piece together the points through a function that guarantees the curve will go through all the assigned points.
+
 ### Simulator.
 You can download the Term3 Simulator which contains the Path Planning Project from the [releases tab (https://github.com/udacity/self-driving-car-sim/releases/tag/T3_v1.2).  
 
