@@ -180,7 +180,7 @@ int main() {
               else
               {
                 //ref_vel = car_vel;
-                //speed_difference += max_acc*((car_vel-ref_vel)/car_vel);            
+                speed_difference += max_acc*((car_vel-ref_vel)/car_vel);            
                 //speed_difference += max_acc;
               }
             }
