@@ -174,7 +174,7 @@ int main() {
               //std::cout << "car vel" << car_vel << " car_speed " << car_speed << std::endl;       
               if (ref_vel > car_vel)
               {                
-                speed_difference -= max_acc*((ref_vel-car_vel)/ref_vel);
+                speed_difference -= 0.5*max_acc*((ref_vel-car_vel)/ref_vel);
                 //speed_difference -= max_acc;
               }
               else
