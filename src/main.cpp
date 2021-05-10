@@ -104,6 +104,7 @@ int main() {
           }
           
           bool car_ahead = false;
+          double car_vel = 0.0;
           bool car_left = false;
           bool car_right = false;
           
@@ -139,7 +140,11 @@ int main() {
             
             if (car_lane == lane)
             {
-              car_ahead = car_ahead | ((scheck > car_s) && (scheck - car_s < 30));              
+              car_ahead = car_ahead | ((scheck > car_s) && (scheck - car_s < 30));    
+              if (car_ahead)
+              {
+                car_vel = speedcheck;
+              }
             }
             else if (car_lane - lane == -1) //if car is in the left lane
             {
@@ -166,7 +171,18 @@ int main() {
             }
             else
             {
-              speed_difference -= max_acc;               
+              //std::cout << "car vel" << car_vel << " car_speed " << car_speed << std::endl;       
+              if (ref_vel > car_vel)
+              {                
+                speed_difference -= max_acc*((ref_vel-car_vel)/ref_vel);
+                //speed_difference -= max_acc;
+              }
+              else
+              {
+                //ref_vel = car_vel;
+                //speed_difference += max_acc*((car_vel-ref_vel)/car_vel);            
+                //speed_difference += max_acc;
+              }
             }
           }
           else
